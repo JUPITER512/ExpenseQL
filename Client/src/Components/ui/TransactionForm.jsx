@@ -5,7 +5,7 @@ const TransactionForm = () => {
   //refetch todos when fetched successfully
   const [createTransaction, { loading, error }] =
     useMutation(CREATE_TRANSACTION,{
-      refetchQueries:['GetTransactions']
+      refetchQueries:['GetTransactions','getCategoriesStats']
     });
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +21,6 @@ const TransactionForm = () => {
         location: formData.get("location"),
         date: formData.get("date"),
       };
-      console.log("transactionData", transactionData);
       await createTransaction({ variables: { input: transactionData } });
       form.reset()
       toast.success('Transaction Added Successfully')

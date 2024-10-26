@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import TransactionFormSkeleton from "../Components/ui/TransactionFormSkeleton";
 import { useMutation, useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { GET_TRANSACTION_ID } from "../graphql/queries/Transcation.query";
-import formatDate from "../utils/formatDate";
 import { UPDATE_TRANSACTION } from "../graphql/mutations/Transaction.mutation";
 // import { GET_TRANSACTIONS } from "../graphql/queries/Transcation.query";
 // const{data,loading}=useQuery(GET_TRANSACTIONS)
 import toast from "react-hot-toast";
 const TransactionPage = () => {
+  const navigate=useNavigate()
   const { id } = useParams();
   const { data, loading } = useQuery(GET_TRANSACTION_ID, {
     variables: {
@@ -58,7 +58,7 @@ const TransactionPage = () => {
 
 
   const[updateTransaction,{loading:updateLoading,error}]=useMutation(UPDATE_TRANSACTION,{
-	refetchQueries:['GetTransactions']
+	refetchQueries:['GetTransactions','getCategoriesStats']
   })
 
   const handleSubmit = async (e) => {
@@ -75,6 +75,7 @@ const TransactionPage = () => {
 			}
 		})
 		toast.success("Update Successfully")
+    navigate('/')
 	} catch (error) {
 		toast.success(error.message)
 		
