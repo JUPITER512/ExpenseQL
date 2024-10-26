@@ -53,7 +53,7 @@ try {
   });
   await server.start();
   app.use(
-    "/",
+    "/graphql",
     express.json(),
     cors({
       origin:"http://localhost:5173",
@@ -69,7 +69,7 @@ try {
       await new Promise((res) => {
         httpServer.listen({ port: 4000 }, res);
       });
-      console.log(`Server Started on http://localhost:4000`);
+      console.log(`Server Started on http://localhost:4000/graphql`);
     })
     .catch((err) => {
       console.log(`Error while connecting db and start server`);
