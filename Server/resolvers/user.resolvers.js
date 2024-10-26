@@ -36,7 +36,7 @@ const user_Resolver = {
     login: async (_, { input }, context) => {
       try {
         const { username, password } = input;
-        const user = await context.authenticate("graphql-local", {
+        const {user} = await context.authenticate("graphql-local", {
           username,
           password,
         });
@@ -46,7 +46,7 @@ const user_Resolver = {
         console.log(`Error while login user`, error);
         throw new Error(error.message || "Internal Server Error");
       }
-    },
+     },
     logout: async (_,__, context) => {
       try {
         await context.logout();

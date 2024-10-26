@@ -7,15 +7,17 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import mergedResolvers from "./resolvers/index.js";
 import mergerTypeDef from "./typeDefs/index.js";
 import { connectDb } from "./db/connect.db.js";
-
-
-
 import passport from "passport";
 import session from "express-session";
 import connectMongo from "connect-mongodb-session";
-
 import configurePassport from './passport/passport.congfig.js';
 import {buildContext } from "graphql-passport";
+
+
+
+
+
+
 try {
   const app = express();
   const httpServer = http.createServer(app);
@@ -35,7 +37,7 @@ try {
   app.use(session({
     secret:process.env.SESSSION_SECRET,
     resave:false,//this option to save session to db on every request or not  if it is true then we have multiple session for one user
-    saveUninitialized:false,
+    saveUninitialized:false,//opt weather to save uninitialized user session  
     cookie:{
       maxAge:1*24*60*60*1000,
       httpOnly:true// this stop cross site scripting attacks
