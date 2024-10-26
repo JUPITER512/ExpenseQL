@@ -25,18 +25,22 @@ const transaction_resolver = {
   Mutation: {
     createTransaction: async (_, { input }, context) => {
       try {
+ 
         const newTransaction = new Transaction({
           ...input,
-          userId: context.getUser(),
+          userId: context.getUser()._id,
         });
         await newTransaction.save();
         return newTransaction;
-      } catch (error) {}
-    },
+      } catch (error) {
+        console.error("Error while creating transaction", error);
+        throw new Error("Error creating transaction");
+      }
+    },  
     updateTransaction: async (_, { input }, context) => {
       try {
         const updateTransaction = await Transaction.findByIdAndUpdate(
-          input.transactionID,
+          input.transactionId,
           input,
           { new: true }
         );

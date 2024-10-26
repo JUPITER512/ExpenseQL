@@ -11,7 +11,7 @@ const transaction_typedef=`#graphql
     }
     type Query{
         transactions:[Transaction!]
-        transaction(transactionID:ID!):Transaction
+        transaction(transactionId:ID!):Transaction
     }
     type Mutation{
         createTransaction(input:createTransactionInput!):Transaction!

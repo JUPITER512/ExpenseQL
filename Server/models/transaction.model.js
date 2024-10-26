@@ -28,7 +28,7 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     default: "Unknown",
   },
-  data: {
+  date: {
     type: Date,
     required: true,
   },
